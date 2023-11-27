@@ -2,12 +2,12 @@ from cffi import FFI
 
 ffibuilder = FFI()
 
-ffibuilder.set_source(
+ffibuilder.set_source_pkgconfig(
     "aiortc.codecs._opus",
+    ["opus"],
     """
-#include <opus/opus.h>
+#include <opus.h>
     """,
-    libraries=["opus"],
 )
 
 ffibuilder.cdef(

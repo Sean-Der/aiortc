@@ -2,8 +2,9 @@ from cffi import FFI
 
 ffibuilder = FFI()
 
-ffibuilder.set_source(
+ffibuilder.set_source_pkgconfig(
     "aiortc.codecs._vpx",
+    ["vpx"],
     """
 #include <vpx/vpx_decoder.h>
 #include <vpx/vpx_encoder.h>
@@ -29,7 +30,6 @@ vpx_codec_err_t vpx_codec_enc_init(vpx_codec_ctx_t *ctx,
     return vpx_codec_enc_init_ver(ctx, iface, cfg, flags, VPX_ENCODER_ABI_VERSION);
 }
     """,
-    libraries=["vpx"],
 )
 
 ffibuilder.cdef(
